@@ -1,0 +1,68 @@
+.button_layout_1 {
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-family: "Arial Black";
+    -fx-padding: 10;
+    -fx-background-color: rgb(114, 137, 218);
+}
+
+.button_layout_1:hover{
+
+    -fx-background-color: rgb(95, 115, 181);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+}
+
+.button_layout_3 {
+    -fx-background-color: rgb(47, 49, 54);
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-family: "Arial Black";
+    -fx-padding: 10;
+}
+
+.stage_background_1 {
+    -fx-background-color: rgb(54, 57, 63);
+}
+
+.stage_background_2 {
+    -fx-background-color: rgb(47, 49, 54);
+}
+
+.button_layout_2 {
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-family: "Arial Black";
+    -fx-padding: 10;
+    -fx-background-color: rgb(61, 130, 101);
+}
+
+.button_layout_2:hover{
+
+    -fx-background-color: rgb(52, 112, 86);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+}
+
+.label_layout_1 {
+    -fx-text-fill: white;
+    -fx-font-size: 12;
+    -fx-font-family: "Arial Black";
+    -fx-padding: 10;
+    -fx-background-color: rgb(61, 130, 101);
+
+}
+
+.spacing_label {
+    -fx-text-fill: rgb(47, 49, 54);
+    -fx-font-size: 16;
+    -fx-font-family: "Arial Black";
+    -fx-padding: 10;
+    -fx-background-color: rgb(47, 49, 54);
+    -fx-opacity: 0;
+}
+
+.spacing_label:hover{
+
+    -fx-background-color: rgb(52, 112, 86);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-opacity: 100;
+}
