@@ -12,30 +12,37 @@ import java.io.*;
 
 public class Main extends Application {
 
-    private BorderPane root = new BorderPane();
-    private VBox rightPane = new VBox(-1);
-    private Label displayFolder = new Label("No Folder Selected!");
-    private File fileFolder = new File("MusicTest");
-    private File folderLocation = new File("data/folderPath.txt");
-    private File[] listFilenames = fileFolder.listFiles();
+    public BorderPane root = new BorderPane();
+    public VBox rightPane = new VBox(-1);
+    public Label displayFolder = new Label("No Folder Selected!");
+    public File fileFolder = new File("MusicTest");
+    public File folderLocation = new File("data/folderPath.txt");
+    public File[] listFilenames = fileFolder.listFiles();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setScene(Main.sceneOne());
+        primaryStage.setTitle("PlayMP3"); // Name of application to display at top of window
+        primaryStage.setScene(new Scene(root, 1053, 480)); //Sets dimensions of stage
+        primaryStage.setResizable(false); //Sets the stage to be non-resizable.
+        primaryStage.show(); //Shows the stage
+
+    }
+
+    public Scene sceneOne() throws Exception {
+        Scene loadScene_1;
+        root.getStylesheets().add("stylesheet.css"); // Opens CSS file
 
         BufferedReader readFile = new BufferedReader(new FileReader(folderLocation));
         System.out.println(readFile.readLine());
         displayFolder.setText(readFile.readLine());
 
-        primaryStage.setTitle("PlayMP3"); // Name of application to display at top of window
-        primaryStage.setScene(new Scene(root, 1053, 480)); //Sets dimensions of stage
-        primaryStage.setResizable(false); //Sets the stage to be non-resizable.
-        primaryStage.show(); //Shows the stage
-        root.getStylesheets().add("stylesheet.css"); // Opens CSS file
-
         VBox leftPane = new VBox(20);
         Button leftButton1 = new Button("I am left.");
+        leftButton1.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
         leftPane.getChildren().add(leftButton1);
         Button leftButton2 = new Button("I am left again.");
+        leftButton2.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
         leftPane.getChildren().add(leftButton2);
         root.setLeft(leftPane);
         leftPane.setAlignment(Pos.CENTER);
@@ -66,8 +73,10 @@ public class Main extends Application {
 
         VBox centerPane = new VBox(20);
         Button centerButton1 = new Button("I am centre.");
+        centerButton1.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
         centerPane.getChildren().add(centerButton1);
         Button centerButton2 = new Button("I am centre again.");
+        centerButton2.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
         centerPane.getChildren().add(centerButton2);
         root.setCenter(centerPane);
         centerPane.setAlignment(Pos.CENTER);
@@ -77,6 +86,7 @@ public class Main extends Application {
         centerPane.getStyleClass().add("stage_background_1"); //Sets background colour
         listFiles();
 
+        return loadScene_1;
     }
 
 
