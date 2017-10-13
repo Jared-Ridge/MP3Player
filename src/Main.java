@@ -1,11 +1,9 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 import java.io.*;
@@ -18,8 +16,8 @@ public class Main extends Application {
     private BorderPane root = new BorderPane();
     private VBox rightPane = new VBox(-1);
     private Label displayFolder = new Label("No Folder Selected!");
-    private File fileFolder = new File("D:\\MusicTest");
-    private File folderLocation = new File("Data/folderPath.txt");
+    private File fileFolder = new File("MusicTest");
+    private File folderLocation = new File("data/folderPath.txt");
 
     @Override
     public void start(Stage primaryStage) throws Exception {
