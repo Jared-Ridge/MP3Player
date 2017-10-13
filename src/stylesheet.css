@@ -60,7 +60,7 @@
     -fx-opacity: 0;
 }
 
-.spacing_label:hover{
+.spacing_label_fixed:hover{
 
     -fx-background-color: rgb(52, 112, 86);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );

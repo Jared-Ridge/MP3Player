@@ -10,7 +10,6 @@ import java.io.*;
 
 // https://stevebirtles.github.io/JavaFXPickNMix/
 
-
 public class Main extends Application {
 
     private BorderPane root = new BorderPane();
@@ -18,6 +17,7 @@ public class Main extends Application {
     private Label displayFolder = new Label("No Folder Selected!");
     private File fileFolder = new File("MusicTest");
     private File folderLocation = new File("data/folderPath.txt");
+    private File[] listFilenames = fileFolder.listFiles();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -92,15 +92,18 @@ public class Main extends Application {
             displayFolder.setText(selectedFolder.getPath()); // Sets the Label - What the user sees
             fileFolder = (selectedFolder); // Sets the directory - What the Computer sees
             System.out.println("Debug: " + displayFolder + " / " + fileFolder);
+            listFilenames = fileFolder.listFiles();
             listFiles();
         }
     }
 
     private void listFiles() {
         int x = 0;
-        fileFolder.listFiles();
-        for(x = 0; x < fileFolder.listFiles().length - 1; x++); {
-            System.out.println();
-        }
+        do{
+            System.out.println(x);
+            System.out.println(listFilenames[x]);
+            x = x + 1;
+        }while(x < fileFolder.listFiles().length);
     }
 }
+
