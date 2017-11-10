@@ -3,39 +3,42 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
+
+import javax.xml.crypto.Data;
 import java.io.*;
 
 // https://stevebirtles.github.io/JavaFXPickNMix/
 
 public class Main extends Application {
 
-    public BorderPane root = new BorderPane();
-    public VBox rightPane = new VBox(-1);
-    public Label displayFolder = new Label("No Folder Selected!");
-    public File fileFolder = new File("MusicTest");
-    public File folderLocation = new File("data/folderPath.txt");
-    public File[] listFilenames = fileFolder.listFiles();
-
+    public static VBox rightPane = new VBox(-1);
+    public static Label displayFolder = new Label("No Folder Selected!");
+    public static File fileFolder = new File("MusicTest");
+    public static File folderLocation = new File("data/folderPath.txt");
+    public static File[] listFilenames = fileFolder.listFiles();
+    public static DatabaseConnection
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(Main.sceneOne());
         primaryStage.setTitle("PlayMP3"); // Name of application to display at top of window
-        primaryStage.setScene(new Scene(root, 1053, 480)); //Sets dimensions of stage
         primaryStage.setResizable(false); //Sets the stage to be non-resizable.
         primaryStage.show(); //Shows the stage
 
     }
 
-    public Scene sceneOne() throws Exception {
-        Scene loadScene_1;
-        root.getStylesheets().add("stylesheet.css"); // Opens CSS file
+    public static Scene sceneOne() throws Exception {
+        BorderPane loadBPane_1 = new BorderPane();
+
+        loadBPane_1.getStylesheets().add("stylesheet.css"); // Opens CSS file
 
         BufferedReader readFile = new BufferedReader(new FileReader(folderLocation));
         System.out.println(readFile.readLine());
         displayFolder.setText(readFile.readLine());
+        loadBPane_1.setPrefWidth(920);
 
         VBox leftPane = new VBox(20);
         Button leftButton1 = new Button("I am left.");
@@ -44,7 +47,7 @@ public class Main extends Application {
         Button leftButton2 = new Button("I am left again.");
         leftButton2.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
         leftPane.getChildren().add(leftButton2);
-        root.setLeft(leftPane);
+        loadBPane_1.setLeft(leftPane);
         leftPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(leftPane, Pos.CENTER_LEFT);
         leftButton1.getStyleClass().add("button_layout_1");
@@ -62,7 +65,7 @@ public class Main extends Application {
         displayFolder.setPrefWidth(413);
         rightPane.getChildren().add(lineSpacing_1);
         displayFolder.getStyleClass().add("label_layout_1");
-        root.setRight(rightPane);
+        loadBPane_1.setRight(rightPane);
         rightPane.setAlignment(Pos.TOP_CENTER);
         BorderPane.setAlignment(rightPane, Pos.CENTER_RIGHT);
         folderButton.getStyleClass().add("button_layout_1");
@@ -78,7 +81,7 @@ public class Main extends Application {
         Button centerButton2 = new Button("I am centre again.");
         centerButton2.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
         centerPane.getChildren().add(centerButton2);
-        root.setCenter(centerPane);
+        loadBPane_1.setCenter(centerPane);
         centerPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(centerPane, Pos.CENTER);
         centerButton1.getStyleClass().add("button_layout_3");
@@ -86,11 +89,13 @@ public class Main extends Application {
         centerPane.getStyleClass().add("stage_background_1"); //Sets background colour
         listFiles();
 
+        Scene loadScene_1 = new Scene(loadBPane_1);
+
         return loadScene_1;
     }
 
 
-    private void selectFolder(ActionEvent ae) {
+    private static void selectFolder(ActionEvent ae) {
         DirectoryChooser folderSelect = new DirectoryChooser();
         folderSelect.setTitle("Select Folder");
         File selectedFolder = folderSelect.showDialog(null);
@@ -107,7 +112,7 @@ public class Main extends Application {
         }
     }
 
-    private void listFiles() {
+    private static void listFiles() {
         int x = 0;
         do{
             System.out.println(x);
