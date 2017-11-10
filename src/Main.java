@@ -3,13 +3,16 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
+import javax.imageio.ImageIO;
 import javax.xml.crypto.Data;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 
 // https://stevebirtles.github.io/JavaFXPickNMix/
 
@@ -20,17 +23,25 @@ public class Main extends Application {
     public static File fileFolder = new File("MusicTest");
     public static File folderLocation = new File("data/folderPath.txt");
     public static File[] listFilenames = fileFolder.listFiles();
+    public static int currentScene = 0;
+    public static Scene loadScene_1;
+    public static Stage initializeStage;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setScene(Main.sceneOne());
+        primaryStage.setScene(sceneOne());
         primaryStage.setTitle("PlayMP3"); // Name of application to display at top of window
+        Image iconPicture = new Image("PlayMP3Icon.png");
         primaryStage.setResizable(false); //Sets the stage to be non-resizable.
-        primaryStage.show(); //Shows the stage
+        initializeStage = primaryStage;
+        initializeStage.show(); //Shows the stage
 
     }
 
     public static Scene sceneOne() throws Exception {
+        currentScene = 1;
+
         BorderPane loadBPane_1 = new BorderPane();
 
         loadBPane_1.getStylesheets().add("stylesheet.css"); // Opens CSS file
@@ -72,7 +83,9 @@ public class Main extends Application {
         lineSpacing_1.getStyleClass().add("spacing_label");
         rightPane.getStyleClass().add("stage_background_2"); //Sets background colour
         rightPane.setPrefSize(313, 480);
-
+        Button nextLayout = new Button(">");
+        nextLayout.setOnAction((ActionEvent ae) -> sceneChanger());
+        rightPane.getChildren().add(nextLayout);
 
         VBox centerPane = new VBox(20);
         Button centerButton1 = new Button("I am centre.");
@@ -89,9 +102,51 @@ public class Main extends Application {
         centerPane.getStyleClass().add("stage_background_1"); //Sets background colour
         listFiles();
 
-        Scene loadScene_1 = new Scene(loadBPane_1);
+
+        loadScene_1 = new Scene(loadBPane_1);
 
         return loadScene_1;
+    }
+
+    private static void sceneChanger() {
+        currentScene = currentScene + 1;
+        if (currentScene > 3) {
+            currentScene = 1;
+
+        }
+        if (currentScene == 1) {
+            try {
+                initializeStage.setScene(sceneOne());
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }else  if (currentScene == 2) {
+            try {
+                initializeStage.setScene(sceneOne());
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }else  if (currentScene == 3) {
+            try {
+                initializeStage.setScene(sceneOne());
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+        } if (currentScene > 3 || currentScene < 1) {
+            Alert invalidScene = new Alert(Alert.AlertType.ERROR);
+            invalidScene.setTitle("Invalid Scene Number");
+            invalidScene.setContentText("The Scene ID is " + currentScene + ".");
+            invalidScene.setHeaderText("The Scene ID is invalid! Returning to default...");
+            try {
+                initializeStage.setScene(sceneOne());
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }
     }
 
 
