@@ -17,7 +17,6 @@ public class SceneThree extends Application {
 
     public static VBox rightPane = new VBox(-1);
     public static Scene loadScene_3;
-    public static Stage initializeStage;
 
 
     @Override
@@ -25,8 +24,8 @@ public class SceneThree extends Application {
         primaryStage.setScene(sceneThree());
         primaryStage.setTitle("PlayMP3"); // Name of application to display at top of window
         primaryStage.setResizable(false); //Sets the stage to be non-resizable.
-        initializeStage = primaryStage;
-        initializeStage.show(); //Shows the stage
+        Main.initializeStage = primaryStage;
+        Main.initializeStage.show(); //Shows the stage
 
     }
 

@@ -19,13 +19,11 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Main extends Application {
 
-    public static VBox rightPane = new VBox(-1);
     public static Label displayFolder = new Label("No Folder Selected!");
     public static File fileFolder = new File("MusicTest");
     public static File folderLocation = new File("data/folderPath.txt");
     public static File[] listFilenames = fileFolder.listFiles();
     public static int currentScene = 0;
-    public static Scene loadScene_1;
     public static Stage initializeStage;
 
 
@@ -41,20 +39,23 @@ public class Main extends Application {
 
     public static void sceneChanger() {
         currentScene = currentScene + 1;
+
         if (currentScene > 3) {
             currentScene = 1;
-
         }
+
         if (currentScene == 1) {
             try {
                 initializeStage.setScene(SceneOne.sceneOne());
-            }catch(Exception e){
+
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
-        }else  if (currentScene == 2) {
+        } else  if (currentScene == 2) {
             try {
                 initializeStage.setScene(SceneTwo.sceneTwo());
+
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -62,6 +63,7 @@ public class Main extends Application {
         }else  if (currentScene == 3) {
             try {
                 initializeStage.setScene(SceneThree.sceneThree());
+
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -71,6 +73,7 @@ public class Main extends Application {
             invalidScene.setTitle("Invalid Scene Number");
             invalidScene.setContentText("The Scene ID is " + currentScene + ".");
             invalidScene.setHeaderText("The Scene ID is invalid! Returning to default...");
+            invalidScene.showAndWait();
             try {
                 initializeStage.setScene(SceneOne.sceneOne());
             }catch(Exception e){
