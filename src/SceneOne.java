@@ -19,7 +19,6 @@ import java.lang.reflect.InvocationTargetException;
 
 public class SceneOne extends Application {
 
-    public static VBox rightPane = new VBox(-1);
     public static Scene loadScene_1;
 
     @Override
@@ -39,10 +38,9 @@ public class SceneOne extends Application {
 
         loadBPane_1.getStylesheets().add("stylesheet.css"); // Opens CSS file
 
-        BufferedReader readFile = new BufferedReader(new FileReader(Main.folderLocation));
-        System.out.println(readFile.readLine());
-        Main.displayFolder.setText(readFile.readLine());
-        loadBPane_1.setPrefWidth(920);
+
+        loadBPane_1.setMinSize(980, 480);
+
 
         VBox leftPane = new VBox(20);
         Button leftButton1 = new Button("I am left.");
@@ -60,6 +58,7 @@ public class SceneOne extends Application {
         leftPane.setPrefSize(213, 480);
 
 
+        VBox rightPane = new VBox(-1);
         Button folderButton = new Button("Select Folder");
         folderButton.setOnAction((ActionEvent ae) -> Main.selectFolder(ae)); //Activates SelectFolder function
         rightPane.getChildren().add(folderButton);
@@ -76,9 +75,7 @@ public class SceneOne extends Application {
         lineSpacing_1.getStyleClass().add("spacing_label");
         rightPane.getStyleClass().add("stage_background_2"); //Sets background colour
         rightPane.setPrefSize(313, 480);
-        Button nextLayout = new Button(">");
-        nextLayout.setOnAction((ActionEvent ae) -> Main.sceneChanger());
-        rightPane.getChildren().add(nextLayout);
+        rightPane.getChildren().add(Main.nextLayout);
 
         VBox centerPane = new VBox(20);
         Button centerButton1 = new Button("I am centre.");
@@ -94,6 +91,7 @@ public class SceneOne extends Application {
         centerButton2.getStyleClass().add("button_layout_3");
         centerPane.getStyleClass().add("stage_background_1"); //Sets background colour
         Main.listFiles();
+
 
 
         loadScene_1 = new Scene(loadBPane_1);

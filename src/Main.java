@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -25,14 +26,23 @@ public class Main extends Application {
     public static File[] listFilenames = fileFolder.listFiles();
     public static int currentScene = 0;
     public static Stage initializeStage;
-
+    public static Button nextLayout = new Button(">");
+    public static DatabaseConnection db = new DatabaseConnection("src/MusicDB.db");
+    public static FileReader fr;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setScene(SceneOne.sceneOne());
         primaryStage.setTitle("PlayMP3"); // Name of application to display at top of window
-        primaryStage.setResizable(false); //Sets the stage to be non-resizable.
         initializeStage = primaryStage;
+        nextLayout.setOnAction((ActionEvent ae) -> Main.sceneChanger());
+        nextLayout.getStyleClass().add("button_layout_2");
+        initializeStage.setMinWidth(980);
+        initializeStage.setMinHeight(480);
+        initializeStage.setResizable(true);
+        BufferedReader readFile = new BufferedReader(new FileReader(Main.folderLocation));
+        System.out.println(readFile.readLine());
+        Main.displayFolder.setText(readFile.readLine());
         initializeStage.show(); //Shows the stage
 
     }
@@ -62,6 +72,7 @@ public class Main extends Application {
 
         }else  if (currentScene == 3) {
             try {
+
                 initializeStage.setScene(SceneThree.sceneThree());
 
             }catch(Exception e){
@@ -69,17 +80,14 @@ public class Main extends Application {
             }
 
         } if (currentScene > 3 || currentScene < 1) {
-            Alert invalidScene = new Alert(Alert.AlertType.ERROR);
-            invalidScene.setTitle("Invalid Scene Number");
-            invalidScene.setContentText("The Scene ID is " + currentScene + ".");
-            invalidScene.setHeaderText("The Scene ID is invalid! Returning to default...");
-            invalidScene.showAndWait();
+            currentScene = 1;
             try {
                 initializeStage.setScene(SceneOne.sceneOne());
-            }catch(Exception e){
+
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -98,15 +106,32 @@ public class Main extends Application {
             System.out.println("Debug: " + displayFolder + " / " + fileFolder);
             listFilenames = fileFolder.listFiles();
             listFiles();
+            WriteTo();
         }
     }
 
     public static void listFiles() {
         int x = 0;
         do{
-            System.out.println(x);
+            System.out.println(x + "(Real Value: " + (x + 1) + ")");
             System.out.println(listFilenames[x]);
             x = x + 1;
         }while(x < fileFolder.listFiles().length);
     }
+
+    public static void WriteTo() {
+        BufferedWriter writeFile = null;
+        try {
+            FileWriter fw = new FileWriter("data/folderPath.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            String fF = String.valueOf(fileFolder);
+            bw.write(fF);
+            System.out.println("DEBUG: " + fF);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
+
