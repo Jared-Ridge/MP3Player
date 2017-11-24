@@ -1,20 +1,20 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Border;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.*;
-import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import javax.imageio.ImageIO;
-import javax.xml.crypto.Data;
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 
 // https://stevebirtles.github.io/JavaFXPickNMix/
 
@@ -23,27 +23,33 @@ public class Main extends Application {
     public static Label displayFolder = new Label("No Folder Selected!");
     public static File fileFolder = new File("MusicTest");
     public static File folderLocation = new File("data/folderPath.txt");
-    public static File[] listFilenames = fileFolder.listFiles();
+    public static File[] listFilenames;
     public static int currentScene = 0;
     public static Stage initializeStage;
     public static Button nextLayout = new Button(">");
     public static DatabaseConnection db = new DatabaseConnection("src/MusicDB.db");
-    public static FileReader fr;
+    private static double xOff = 0;
+    private static double yOff = 0;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        BufferedReader readFile = new BufferedReader(new FileReader(Main.folderLocation));
+        fileFolder = new File(readFile.readLine());
+        listFilenames = fileFolder.listFiles();
         primaryStage.setScene(SceneOne.sceneOne());
         primaryStage.setTitle("PlayMP3"); // Name of application to display at top of window
         initializeStage = primaryStage;
+        initializeStage.initStyle(StageStyle.UNDECORATED); // To be done later maybe in free time
+        initializeStage.initStyle(StageStyle.TRANSPARENT);
         nextLayout.setOnAction((ActionEvent ae) -> Main.sceneChanger());
         nextLayout.getStyleClass().add("button_layout_2");
         initializeStage.setMinWidth(980);
         initializeStage.setMinHeight(480);
         initializeStage.setResizable(true);
-        BufferedReader readFile = new BufferedReader(new FileReader(Main.folderLocation));
         System.out.println(readFile.readLine());
         Main.displayFolder.setText(readFile.readLine());
         initializeStage.show(); //Shows the stage
+        readFile.close();
 
     }
 
@@ -112,25 +118,84 @@ public class Main extends Application {
 
     public static void listFiles() {
         int x = 0;
-        do{
-            System.out.println(x + "(Real Value: " + (x + 1) + ")");
-            System.out.println(listFilenames[x]);
-            x = x + 1;
-        }while(x < fileFolder.listFiles().length);
+        if (fileFolder.listFiles() == null) {
+            System.out.println("Something's gone horribly wrong...");
+            System.exit(-1);
+        } else {
+            do {
+                System.out.println(x + "(Real Value: " + (x + 1) + ")");
+                System.out.println(listFilenames[x]);
+                x = x + 1;
+            } while (x < fileFolder.listFiles().length);
+        }
     }
 
     public static void WriteTo() {
         BufferedWriter writeFile = null;
         try {
-            FileWriter fw = new FileWriter("data/folderPath.txt");
-            BufferedWriter bw = new BufferedWriter(fw);
+            FileWriter fw = new FileWriter(folderLocation);
             String fF = String.valueOf(fileFolder);
-            bw.write(fF);
+            fw.write(fF);
+            fw.close();
             System.out.println("DEBUG: " + fF);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public static HBox topBar() {
+        HBox topBar = new HBox(0);
+
+        Button minButton = new Button("-");
+        minButton.getStyleClass().add("button_layout_5");
+        minButton.setMaxHeight(20);
+        minButton.setOnAction((ActionEvent ae) -> initializeStage.setIconified(true));
+        topBar.getChildren().add(minButton);
+
+        Button exitButton = new Button("X");
+        exitButton.getStyleClass().add("button_layout_4");
+        exitButton.setMaxHeight(20);
+        exitButton.setOnAction((ActionEvent ae) -> System.exit(100));
+        topBar.getChildren().add(exitButton);
+
+        topBar.getStyleClass().add("stage_background_3");
+        topBar.setAlignment(Pos.CENTER_RIGHT);
+
+        topBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOff = initializeStage.getX() - event.getScreenX();
+                yOff = initializeStage.getY() - event.getScreenY();
+
+            }
+        });
+
+        topBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                initializeStage.setX(event.getScreenX() + xOff);
+                initializeStage.setY(event.getScreenY() + yOff);
+            }
+        });
+
+        /*
+        Button leftButton1 = new Button("I am left.");
+        leftButton1.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
+        leftPane.getChildren().add(leftButton1);
+        Button leftButton2 = new Button("I am left again.");
+        leftButton2.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
+        leftPane.getChildren().add(leftButton2);
+        loadBPane_1.setLeft(leftPane);
+        leftPane.setAlignment(Pos.CENTER);
+        BorderPane.setAlignment(leftPane, Pos.CENTER_LEFT);
+        leftButton1.getStyleClass().add("button_layout_1");
+        leftButton2.getStyleClass().add("button_layout_2");
+        leftPane.getStyleClass().add("stage_background_2"); //Sets background colour
+         */
+        topBar.setMinHeight(30);
+        topBar.setMaxHeight(30);
+        return topBar;
     }
 
 }

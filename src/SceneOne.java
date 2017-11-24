@@ -92,6 +92,8 @@ public class SceneOne extends Application {
         centerPane.getStyleClass().add("stage_background_1"); //Sets background colour
         Main.listFiles();
 
+        HBox topBar = Main.topBar();
+        loadBPane_1.setTop(topBar);
 
 
         loadScene_1 = new Scene(loadBPane_1);
