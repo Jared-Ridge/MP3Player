@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -88,6 +89,8 @@ public class SceneThree extends Application {
         centerPane.getStyleClass().add("stage_background_1"); //Sets background colour
         Main.listFiles();
 
+        HBox topBar = Main.topBar();
+        loadBPane_2.setTop(topBar);
 
         loadScene_3 = new Scene(loadBPane_2);
 

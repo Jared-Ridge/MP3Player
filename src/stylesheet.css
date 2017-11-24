@@ -20,6 +20,20 @@
     -fx-padding: 10;
 }
 
+.song_layout_1 {
+    -fx-background-color: rgb(47, 49, 54);
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-family: "Arial Black";
+    -fx-padding: 10;
+}
+
+.song_layout_1:hover{
+    -fx-background-color: rgb(27, 29, 34);
+}
+
+
+
 .button_layout_4 {
     -fx-background-color: transparent;
     -fx-text-fill: white;
@@ -34,23 +48,25 @@
     -fx-font-size: 22;
     -fx-font-family: "Arial Black";
     -fx-padding: 10;
-    -fx-font-weight: bolder;
+    -fx-font-weight: 200;
 }
 
 .button_layout_5:hover {
-    -fx-background-color: rgb(27, 29, 34);
+    // -fx-background-color: rgb(27, 29, 34);
     -fx-text-fill: white;
-    -fx-font-size: 22;
+    -fx-font-size: 23;
     -fx-font-family: "Arial Black";
     -fx-padding: 10;
+    -fx-font-weight: 400;
 }
 
 .button_layout_4:hover {
-    -fx-background-color: rgb(27, 29, 34);
+    // -fx-background-color: rgb(27, 29, 34);
     -fx-text-fill: white;
-    -fx-font-size: 14;
+    -fx-font-size: 15;
     -fx-font-family: "Arial Black";
     -fx-padding: 10;
+    -fx-font-weight: 400;
 }
 
 

@@ -44,7 +44,9 @@ public class Main extends Application {
         nextLayout.setOnAction((ActionEvent ae) -> Main.sceneChanger());
         nextLayout.getStyleClass().add("button_layout_2");
         initializeStage.setMinWidth(980);
+        initializeStage.setMaxWidth(980);
         initializeStage.setMinHeight(480);
+        initializeStage.setMaxHeight(480);
         initializeStage.setResizable(true);
         System.out.println(readFile.readLine());
         Main.displayFolder.setText(readFile.readLine());
@@ -119,12 +121,13 @@ public class Main extends Application {
     public static void listFiles() {
         int x = 0;
         if (fileFolder.listFiles() == null) {
-            System.out.println("Something's gone horribly wrong...");
-            System.exit(-1);
+            System.out.println("The folder selected does not exist!");
         } else {
             do {
-                System.out.println(x + "(Real Value: " + (x + 1) + ")");
+                System.out.println(x + " (Real Value: " + (x + 1) + ")");
                 System.out.println(listFilenames[x]);
+                new DisplayMP3().dSong(listFilenames[x], 330);
+                System.out.println();
                 x = x + 1;
             } while (x < fileFolder.listFiles().length);
         }

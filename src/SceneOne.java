@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -97,6 +98,19 @@ public class SceneOne extends Application {
 
 
         loadScene_1 = new Scene(loadBPane_1);
+
+            int x = 0;
+            if (Main.fileFolder.listFiles() == null) {
+                System.out.println("The folder selected does not exist!");
+            } else {
+                do {
+                    centerPane.getChildren().add(new DisplayMP3().dSong(Main.listFilenames[x], 330));
+                    x = x + 1;
+                } while (x < Main.fileFolder.listFiles().length);
+            }
+
+        ScrollPane scroll = new ScrollPane();
+        scroll.getContent(centerPane);
 
         return loadScene_1;
     }
