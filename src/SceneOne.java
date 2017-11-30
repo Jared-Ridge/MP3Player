@@ -79,38 +79,28 @@ public class SceneOne extends Application {
         rightPane.getChildren().add(Main.nextLayout);
 
         VBox centerPane = new VBox(20);
-        Button centerButton1 = new Button("I am centre.");
-        centerButton1.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
-        centerPane.getChildren().add(centerButton1);
-        Button centerButton2 = new Button("I am centre again.");
-        centerButton2.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
-        centerPane.getChildren().add(centerButton2);
-        loadBPane_1.setCenter(centerPane);
+        ScrollPane scroll = new ScrollPane(centerPane);
+        loadBPane_1.setCenter(scroll);
         centerPane.setAlignment(Pos.CENTER);
-        BorderPane.setAlignment(centerPane, Pos.CENTER);
-        centerButton1.getStyleClass().add("button_layout_3");
-        centerButton2.getStyleClass().add("button_layout_3");
+        BorderPane.setAlignment(scroll, Pos.CENTER);
         centerPane.getStyleClass().add("stage_background_1"); //Sets background colour
         Main.listFiles();
 
         HBox topBar = Main.topBar();
         loadBPane_1.setTop(topBar);
-
-
         loadScene_1 = new Scene(loadBPane_1);
-
-            int x = 0;
+        centerPane.setMaxHeight(480);
+        scroll.setMaxHeight(480);
+        int x = 0;
             if (Main.fileFolder.listFiles() == null) {
                 System.out.println("The folder selected does not exist!");
             } else {
                 do {
                     centerPane.getChildren().add(new DisplayMP3().dSong(Main.listFilenames[x], 330));
+                    centerPane.setMaxHeight(480);
                     x = x + 1;
                 } while (x < Main.fileFolder.listFiles().length);
             }
-
-        ScrollPane scroll = new ScrollPane();
-        scroll.getContent(centerPane);
 
         return loadScene_1;
     }

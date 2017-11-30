@@ -156,6 +156,12 @@ public class Main extends Application {
         minButton.setOnAction((ActionEvent ae) -> initializeStage.setIconified(true));
         topBar.getChildren().add(minButton);
 
+        Button maxButton = new Button("◻");
+        maxButton.getStyleClass().add("button_layout_5");
+        maxButton.setMaxHeight(20);
+        maxButton.setOnAction((ActionEvent ae) -> initializeStage.setMaximized(true));
+        topBar.getChildren().add(maxButton);
+
         Button exitButton = new Button("X");
         exitButton.getStyleClass().add("button_layout_4");
         exitButton.setMaxHeight(20);
@@ -181,21 +187,6 @@ public class Main extends Application {
                 initializeStage.setY(event.getScreenY() + yOff);
             }
         });
-
-        /*
-        Button leftButton1 = new Button("I am left.");
-        leftButton1.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
-        leftPane.getChildren().add(leftButton1);
-        Button leftButton2 = new Button("I am left again.");
-        leftButton2.setOnAction((ActionEvent ae) -> System.out.println("Oops! This button does nothing at the moment!"));
-        leftPane.getChildren().add(leftButton2);
-        loadBPane_1.setLeft(leftPane);
-        leftPane.setAlignment(Pos.CENTER);
-        BorderPane.setAlignment(leftPane, Pos.CENTER_LEFT);
-        leftButton1.getStyleClass().add("button_layout_1");
-        leftButton2.getStyleClass().add("button_layout_2");
-        leftPane.getStyleClass().add("stage_background_2"); //Sets background colour
-         */
         topBar.setMinHeight(30);
         topBar.setMaxHeight(30);
         return topBar;

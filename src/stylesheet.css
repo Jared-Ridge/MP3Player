@@ -53,8 +53,7 @@
 
 .button_layout_5:hover {
     // -fx-background-color: rgb(27, 29, 34);
-    -fx-text-fill: white;
-    -fx-font-size: 23;
+    -fx-text-fill: gray;
     -fx-font-family: "Arial Black";
     -fx-padding: 10;
     -fx-font-weight: 400;
@@ -62,8 +61,7 @@
 
 .button_layout_4:hover {
     // -fx-background-color: rgb(27, 29, 34);
-    -fx-text-fill: white;
-    -fx-font-size: 15;
+    -fx-text-fill: gray;
     -fx-font-family: "Arial Black";
     -fx-padding: 10;
     -fx-font-weight: 400;
@@ -119,4 +117,8 @@
 
 .stage_background_3 {
     -fx-background-color: rgb(37, 39, 44);
+}
+
+.text_general_1 {
+    -fx-text-fill: white;
 }
