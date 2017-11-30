@@ -192,5 +192,17 @@ public class Main extends Application {
         return topBar;
     }
 
+    public static String fileType(String songName) {
+        String fileType_ = "";
+        String fileToString = String.valueOf(songName);
+        int x = fileToString.lastIndexOf('.');
+        if (x > 0) {
+            fileType_ = fileToString.substring(x + 1);
+        }
+        return fileType_;
+    }
+
+
+
 }
 

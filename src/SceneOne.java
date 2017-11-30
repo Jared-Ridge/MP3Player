@@ -91,14 +91,17 @@ public class SceneOne extends Application {
         loadScene_1 = new Scene(loadBPane_1);
         centerPane.setMaxHeight(480);
         scroll.setMaxHeight(480);
+        scroll.getStyleClass().add("stage_background_2");
         int x = 0;
             if (Main.fileFolder.listFiles() == null) {
                 System.out.println("The folder selected does not exist!");
             } else {
                 do {
-                    centerPane.getChildren().add(new DisplayMP3().dSong(Main.listFilenames[x], 330));
-                    centerPane.setMaxHeight(480);
-                    x = x + 1;
+                    String returnFilename = Main.fileType((String.valueOf(Main.listFilenames[x])));
+                    if(returnFilename.equals("mp3")) {
+                        centerPane.getChildren().add(new DisplayMP3().dSong(Main.listFilenames[x], 330));
+                        x = x + 1;
+                    }
                 } while (x < Main.fileFolder.listFiles().length);
             }
 

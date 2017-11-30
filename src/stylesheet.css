@@ -116,9 +116,27 @@
 }
 
 .stage_background_3 {
-    -fx-background-color: rgb(37, 39, 44);
+    -fx-background-color: rgb(32, 34, 37);
 }
 
 .text_general_1 {
     -fx-text-fill: white;
+}
+
+// -------- SCROLL PANE CSS CUSTOMISATION --------
+
+.stage_background_2 .scroll-bar:vertical .track {
+    -fx-background-color: rgb(54, 57, 63);
+}
+
+.stage_background_2 .scroll-bar:vertical .track:hover {
+    -fx-background-color: rgb(49, 52, 58);
+}
+
+.stage_background_2 .scroll-bar:vertical .thumb {
+    -fx-background-color: rgb(32, 34, 37);
+}
+
+.stage_background_2 .scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: rgb(22, 24, 27);
 }
