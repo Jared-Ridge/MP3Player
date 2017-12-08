@@ -6,15 +6,17 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 
 public class DisplayMP3 {
-    public static HBox dSong(File songName, int songLength ){
-        String fileType = "";
+    public static String fileType;
+
+    public static HBox dSong(File songName, int songLength) {
+        fileType = "";
         String fileToString = String.valueOf(songName);
         int x = fileToString.lastIndexOf('.');
         if (x > 0) {
-            fileType = fileToString.substring(x+1);
+            fileType = fileToString.substring(x + 1);
         }
-
-        System.out.println(fileType);
+        if (fileType == "mp3") {
+            System.out.println(fileType);
             HBox songDisplay = new HBox();
             VBox songSort = new VBox();
             Button playSong = new Button("▶");
@@ -40,5 +42,8 @@ public class DisplayMP3 {
             songDisplay.getStyleClass().add("song_layout_1");
             songDisplay.setPrefWidth(480);
             return songDisplay;
+        }else{
+            return null;
+        }
     }
 }

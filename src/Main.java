@@ -30,13 +30,14 @@ public class Main extends Application {
     public static DatabaseConnection db = new DatabaseConnection("src/MusicDB.db");
     private static double xOff = 0;
     private static double yOff = 0;
+    public static int xFiles;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         BufferedReader readFile = new BufferedReader(new FileReader(Main.folderLocation));
         fileFolder = new File(readFile.readLine());
         listFilenames = fileFolder.listFiles();
-        primaryStage.setScene(SceneOne.sceneOne());
+        primaryStage.setScene(SceneTwo.sceneTwo());
         primaryStage.setTitle("PlayMP3"); // Name of application to display at top of window
         initializeStage = primaryStage;
         initializeStage.initStyle(StageStyle.UNDECORATED); // To be done later maybe in free time
@@ -48,10 +49,13 @@ public class Main extends Application {
         initializeStage.setMinHeight(480);
         initializeStage.setMaxHeight(480);
         initializeStage.setResizable(true);
+        initializeStage.show(); //Shows the stage
         System.out.println(readFile.readLine());
         Main.displayFolder.setText(readFile.readLine());
-        initializeStage.show(); //Shows the stage
         readFile.close();
+
+        System.out.println(String.valueOf("UH OH"));
+
 
     }
 
@@ -115,21 +119,22 @@ public class Main extends Application {
             listFilenames = fileFolder.listFiles();
             listFiles();
             WriteTo();
+
         }
     }
 
     public static void listFiles() {
-        int x = 0;
+        xFiles = 0;
         if (fileFolder.listFiles() == null) {
             System.out.println("The folder selected does not exist!");
         } else {
             do {
-                System.out.println(x + " (Real Value: " + (x + 1) + ")");
-                System.out.println(listFilenames[x]);
-                new DisplayMP3().dSong(listFilenames[x], 330);
+                System.out.println(xFiles + " (Real Value: " + (xFiles + 1) + ")");
+                System.out.println(listFilenames[xFiles]);
+                new DisplayMP3().dSong(listFilenames[xFiles], 330);
                 System.out.println();
-                x = x + 1;
-            } while (x < fileFolder.listFiles().length);
+                xFiles = xFiles + 1;
+            } while (xFiles < fileFolder.listFiles().length);
         }
     }
 
@@ -200,9 +205,7 @@ public class Main extends Application {
             fileType_ = fileToString.substring(x + 1);
         }
         return fileType_;
+
     }
-
-
-
 }
 
