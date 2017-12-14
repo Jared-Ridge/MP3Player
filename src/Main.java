@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -31,6 +32,7 @@ public class Main extends Application {
     private static double xOff = 0;
     private static double yOff = 0;
     public static int xFiles;
+    public static String fileText = ".mp3";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -54,8 +56,6 @@ public class Main extends Application {
         Main.displayFolder.setText(readFile.readLine());
         readFile.close();
 
-        System.out.println(String.valueOf("UH OH"));
-
 
     }
 
@@ -74,24 +74,25 @@ public class Main extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else  if (currentScene == 2) {
+        } else if (currentScene == 2) {
             try {
                 initializeStage.setScene(SceneTwo.sceneTwo());
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-        }else  if (currentScene == 3) {
+        } else if (currentScene == 3) {
             try {
 
                 initializeStage.setScene(SceneThree.sceneThree());
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-        } if (currentScene > 3 || currentScene < 1) {
+        }
+        if (currentScene > 3 || currentScene < 1) {
             currentScene = 1;
             try {
                 initializeStage.setScene(SceneOne.sceneOne());
@@ -196,16 +197,12 @@ public class Main extends Application {
         topBar.setMaxHeight(30);
         return topBar;
     }
-
-    public static String fileType(String songName) {
-        String fileType_ = "";
-        String fileToString = String.valueOf(songName);
-        int x = fileToString.lastIndexOf('.');
-        if (x > 0) {
-            fileType_ = fileToString.substring(x + 1);
+    public static void fileMP3() {
+        if(fileFolder.isDirectory() == false){
+            System.out.println("Something's gone wrong... Main.fileMP3");
+            return;
+            }
+            //https://www.mkyong.com/java/how-to-find-files-with-certain-extension-only/
         }
-        return fileType_;
-
     }
 }
-
